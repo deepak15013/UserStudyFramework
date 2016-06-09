@@ -9,6 +9,13 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String COL_1 = "_id";
+    private static final String COL_2 = "username";
+    private static final String COL_3 = "sign_up_time";
+    private static final String COL_4 = "sign_up_video_location";
+    private static final String COL_5 = "num_of_successful_login";
+    private static final String COL_6 = "mean_login_time";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,19 +24,38 @@ public class MainActivity extends AppCompatActivity {
 
     public void retrieveDetails(View view) {
         // Retrieve student records
-        String URL = "content://com.example.numericalpass.NumPin/users";
+        String URL = "content://com.example.numericalpass.provider/users";
 
         Uri students = Uri.parse(URL);
-        Cursor c = managedQuery(students, null, null, null, "");
+        //Cursor c = managedQuery(students, null, null, null, "");
+        // query(Uri,          The content uri
+        // mProjection,        The columns to return for each row
+        // mSelectionClause,   Selection Criteria
+        // mSelectionArgs,     Selection Criteria
+        // mSortOrder);        The sort order for the returned rows
 
-        if (c.moveToFirst()) {
-            do{
-                Toast.makeText(this,
-                        c.getString(c.getColumnIndex("_id")) +
-                                ", " +  c.getString(c.getColumnIndex("username")) +
-                                ", " + c.getString(c.getColumnIndex("number_of_successful_login")),
-                        Toast.LENGTH_SHORT).show();
-            } while (c.moveToNext());
+        Cursor cursor = null;
+
+        try {
+            cursor = getContentResolver().query(students, null, null, null, "");
+
+            if(cursor.moveToFirst()) {
+                do {
+                    Toast.makeText(this,
+                            cursor.getString(cursor.getColumnIndex(COL_1)) +
+                                    ", " +  cursor.getString(cursor.getColumnIndex(COL_2)) +
+                                    ", " + cursor.getString(cursor.getColumnIndex(COL_3)) +
+                                    ", " + cursor.getString(cursor.getColumnIndex(COL_4)) +
+                                    ", "+ cursor.getString(cursor.getColumnIndex(COL_5)) +
+                                    ", "+ cursor.getString(cursor.getColumnIndex(COL_6)),
+                            Toast.LENGTH_SHORT).show();
+                } while (cursor.moveToNext());
+            }
+
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
     }
 }
