@@ -15,11 +15,14 @@ public class MainActivity extends AppCompatActivity {
     private static final String COL_4 = "sign_up_video_location";
     private static final String COL_5 = "num_of_successful_login";
     private static final String COL_6 = "mean_login_time";
+    private static final String COL_7 = "video_location_of_every_login";
+    private static final String COL_8 = "num_of_failed_login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     public void retrieveDetails(View view) {
@@ -47,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
                                     ", " + cursor.getString(cursor.getColumnIndex(COL_3)) +
                                     ", " + cursor.getString(cursor.getColumnIndex(COL_4)) +
                                     ", "+ cursor.getString(cursor.getColumnIndex(COL_5)) +
-                                    ", "+ cursor.getString(cursor.getColumnIndex(COL_6)),
-                            Toast.LENGTH_SHORT).show();
+                                    ", "+ cursor.getString(cursor.getColumnIndex(COL_6)) +
+                                    ", "+cursor.getString(cursor.getColumnIndex(COL_7)) +
+                                    ", "+cursor.getString(cursor.getColumnIndex(COL_8)),
+                            Toast.LENGTH_LONG).show();
                 } while (cursor.moveToNext());
             }
 
