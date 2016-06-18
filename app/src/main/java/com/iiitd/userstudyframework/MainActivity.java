@@ -1,5 +1,6 @@
 package com.iiitd.userstudyframework;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -108,6 +109,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         
+    }
+
+    public void uploadCSVFiles(View view) {
+        Toast.makeText(MainActivity.this, "uploading files", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void editDemographicInformation(View view) {
+        CustomPrefManager.shared().init(getApplicationContext());
+        CustomPrefManager.shared().setFirstStart(true);
+
+        Intent intent = new Intent(MainActivity.this, DemographicForm.class);
+        finish();
+        startActivity(intent);
     }
     
 }

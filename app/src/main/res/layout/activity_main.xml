@@ -35,4 +35,18 @@
         android:layout_marginTop="20dp"
         android:onClick="retrieveDetailsFromImageDB"/>
 
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="upload"
+        android:onClick="uploadCSVFiles"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Edit Demographic information"
+        android:onClick="editDemographicInformation"/>
+
 </LinearLayout>

@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">UserStudyFramework</string>
+
+    <string name="education_prompt">Select Education Level</string>
+
+    <string-array name="education_level">
+        <item>10th</item>
+        <item>12th</item>
+        <item>Undergraduate</item>
+        <item>Postgraduate</item>
+        <item>Doctorate</item>
+    </string-array>
+
 </resources>
