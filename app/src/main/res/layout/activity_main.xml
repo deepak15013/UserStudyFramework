@@ -15,29 +15,6 @@
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="show data from numerical DB"
-        android:layout_gravity="center_horizontal"
-        android:onClick="retrieveDetailsFromNumDB"/>
-
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="show data from Word db"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:onClick="retrieveDetailsFromWordDB"/>
-
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="show data from Image db"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:onClick="retrieveDetailsFromImageDB"/>
-
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="upload"
         android:onClick="uploadCSVFiles"/>
@@ -47,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Edit Demographic information"
-        android:onClick="editDemographicInformation"/>
+        android:onClick="editDemographicInformation"
+        android:visibility="invisible"/>
 
 </LinearLayout>

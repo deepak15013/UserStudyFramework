@@ -3,6 +3,7 @@ package com.iiitd.userstudyframework;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 /**
  * Created by deepaksood619 on 18/6/16.
@@ -24,9 +25,8 @@ public class CustomPrefManager {
     }
 
     public void init(Context context) {
-        if(sharedPreferences == null) {
+        if(sharedPreferences == null)
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        }
     }
 
     public boolean setFirstStart(boolean firstStart) {

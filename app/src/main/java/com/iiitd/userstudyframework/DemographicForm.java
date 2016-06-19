@@ -37,6 +37,9 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class DemographicForm extends AppCompatActivity {
@@ -154,10 +157,9 @@ public class DemographicForm extends AppCompatActivity {
     private void saveToFile() {
 
         File file = Environment.getExternalStorageDirectory();
-        File dir = new File(file.getAbsolutePath()+"/UserStudyFramework/");
+        File dir = new File(file.getAbsolutePath() + "/UserStudyFramework/");
         dir.mkdir();
 
-        Log.v("dks",dir.getAbsolutePath());
         CustomPrefManager.shared().setLocalStorageLocation(dir.getAbsolutePath());
 
         String fileName = "UserDemographicInformation.txt";
@@ -174,74 +176,17 @@ public class DemographicForm extends AppCompatActivity {
 
             Toast.makeText(DemographicForm.this, "Information saved to sdcard", Toast.LENGTH_SHORT).show();
 
-            storeAwsFiles();
+            final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyyyhhmmss");
+            String timeStamp = simpleDateFormat.format(new Date());
 
+            String FOLDER_NAME = etName.getText().toString().toLowerCase().replaceAll("\\s", "")+timeStamp;
+
+            CustomPrefManager.shared().setS3FolderName(FOLDER_NAME);
+
+            startNextActivity();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    public void storeAwsFiles() {
-
-        CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-                getApplicationContext(),
-                "ap-northeast-1:4084ff1b-ae36-428a-8090-aa3108340958", // Identity Pool ID
-                Regions.AP_NORTHEAST_1 // Region
-        );
-
-        // Create an S3 client
-        AmazonS3 s3 = new AmazonS3Client(credentialsProvider);
-
-        // Set the region of your S3 bucket
-        s3.setRegion(Region.getRegion(Regions.AP_NORTHEAST_1));
-
-        File file = Environment.getExternalStorageDirectory();
-        File fileToUpload = new File(file.getAbsolutePath()+"/UserStudyFramework/UserDemographicInformation.txt");
-
-        TransferUtility transferUtility = new TransferUtility(s3, getApplicationContext());
-
-        String MY_BUCKET = "userstudyframeworkbucket";
-        String FOLDER_NAME = etName.getText().toString().toLowerCase().replaceAll("\\s","");
-        String FILE_KEY = FOLDER_NAME + "/userdemographicinfo.txt";
-
-        TransferObserver observer = transferUtility.upload(
-                MY_BUCKET,     /* The bucket to upload to */
-                FILE_KEY,    /* The key for the uploaded object */
-                fileToUpload        /* The file where the data to upload exists */
-        );
-
-        transferObserverListener(observer);
-
-        CustomPrefManager.shared().setFirstStart(false);
-        CustomPrefManager.shared().setS3FolderName(FOLDER_NAME);
-
-        Toast.makeText(DemographicForm.this, "user information uploaded", Toast.LENGTH_SHORT).show();
-        startNextActivity();
-    }
-
-    public void transferObserverListener(TransferObserver transferObserver){
-
-        transferObserver.setTransferListener(new TransferListener(){
-
-            @Override
-            public void onStateChanged(int id, TransferState state) {
-                Log.e("statechange", state+"");
-            }
-
-            @Override
-            public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-                int percentage = (int) (bytesCurrent/bytesTotal * 100);
-                Log.e("percentage",percentage +"");
-            }
-
-            @Override
-            public void onError(int id, Exception ex) {
-                Log.e("error","error");
-            }
-
-        });
-    }
-
-
 }

@@ -2,11 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.iiitd.userstudyframework">
 
-    <uses-permission android:name="com.example.numericalpass.READ_DATABASE" />
-    <uses-permission android:name="com.example.numericalpass.WRITE_DATABASE" />
-    <uses-permission android:name="com.example.wordpassword.READ_DATABASE" />
-    <uses-permission android:name="com.example.wordpassword.WRITE_DATABASE" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
