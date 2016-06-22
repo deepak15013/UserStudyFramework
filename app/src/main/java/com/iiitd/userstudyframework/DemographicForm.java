@@ -182,6 +182,7 @@ public class DemographicForm extends AppCompatActivity {
             String FOLDER_NAME = etName.getText().toString().toLowerCase().replaceAll("\\s", "")+timeStamp;
 
             CustomPrefManager.shared().setS3FolderName(FOLDER_NAME);
+            CustomPrefManager.shared().setFirstStart(false);
 
             startNextActivity();
 
