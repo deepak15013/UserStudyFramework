@@ -12,10 +12,20 @@
     android:background="@color/colorPrimary"
     tools:context="com.iiitd.userstudyframework.MainActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your files will be automatically synced to our servers at night
+        but if you wish to do it now, click the below button"
+        android:textColor="@android:color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
+        android:gravity="center"/>
+
     <Button
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="50dp"
         android:text="upload"
         android:onClick="uploadCSVFiles"/>
 
@@ -25,6 +35,6 @@
         android:layout_marginTop="20dp"
         android:text="Edit Demographic information"
         android:onClick="editDemographicInformation"
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
 
 </LinearLayout>
