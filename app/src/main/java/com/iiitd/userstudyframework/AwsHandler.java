@@ -55,7 +55,7 @@ public class AwsHandler {
 
     public void storeAwsFile(File fileToUpload, String fileKey) {
 
-        String fullFileKey = CustomPrefManager.shared().getS3FolderName() + "/" + fileKey;
+        String fullFileKey = CustomPrefManager.shared().getS3FolderName(this.context) + "/" + fileKey;
         Log.v("dks","fullFileKey: "+fullFileKey);
 
         TransferObserver observer = transferUtility.upload(
@@ -78,8 +78,13 @@ public class AwsHandler {
 
             @Override
             public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-                int percentage = (int) (bytesCurrent/bytesTotal * 100);
-                Log.e("percentage",percentage +"");
+                try{
+                    int percentage = (int) (bytesCurrent/bytesTotal * 100);
+                    Log.e("percentage",percentage +"");
+                } catch (ArithmeticException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             @Override

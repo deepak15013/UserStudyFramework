@@ -11,8 +11,9 @@ public class MyReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent service = new Intent(context, MyAlarmService.class);
-        context.startActivity(service);
+        Intent service = new Intent(context, com.iiitd.userstudyframework.MyAlarmService.class);
+        service.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startService(service);
     }
 
 }

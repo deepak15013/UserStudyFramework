@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 14);
+        calendar.set(Calendar.MINUTE, 30);
 
         Intent intent = new Intent(MainActivity.this, MyReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, 0);
@@ -51,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
         File folder = new File(dirLocation);
         if(folder.exists()) {
             File[] files = folder.listFiles();
-            for(int i=0; i<files.length; i++) {
-                if(files[i].isFile()) {
-                    AwsHandler.shared().storeAwsFile(files[i], files[i].getName());
-                    Log.v("dks","file uploaded "+ files[i].getName());
+            for (File file : files) {
+                if (file.isFile()) {
+                    AwsHandler.shared().storeAwsFile(file, file.getName());
+                    Log.v("dks", "file uploaded " + file.getName());
                 }
             }
         }

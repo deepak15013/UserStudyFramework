@@ -45,7 +45,10 @@ public class CustomPrefManager {
         return sharedPreferences.edit().putString(PREF_S3_FOLDER_NAME,folderName).commit();
     }
 
-    public String getS3FolderName() {
+    public String getS3FolderName(Context context) {
+        if(sharedPreferences == null) {
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        }
         return sharedPreferences.getString(PREF_S3_FOLDER_NAME,"");
     }
 
