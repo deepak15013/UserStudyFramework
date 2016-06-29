@@ -121,31 +121,49 @@ public class DemographicForm extends AppCompatActivity {
     }
 
     public void submitDemographicInfo(View view) {
-        int selectedGenderId = rgGender.getCheckedRadioButtonId();
-        rbGender = (RadioButton) findViewById(selectedGenderId);
 
-        int selectedLockId = rgTypeOfLock.getCheckedRadioButtonId();
-        rbLock = (RadioButton) findViewById(selectedLockId);
+        if(etName.getText().toString().trim().equalsIgnoreCase("")) {
+            etName.setError("Please enter your name");
+        } else if(etAge.getText().toString().trim().equalsIgnoreCase("")) {
+            etAge.setError("Please enter your age");
+        } else if(rgGender.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(DemographicForm.this, "Please select your gender", Toast.LENGTH_SHORT).show();
+        } else if(etYears.getText().toString().trim().equalsIgnoreCase("")) {
+            etYears.setError("Please enter num of years using smartphone");
+        } else if(rgTypeOfLock.getCheckedRadioButtonId() == -1) {
+            Toast.makeText(DemographicForm.this, "Please select type of lock you use", Toast.LENGTH_SHORT).show();
+        } else if(rgTypeOfLock.getCheckedRadioButtonId() == R.id.rb_other_lock && etOtherLock.getText().toString().trim().equalsIgnoreCase("")) {
+            etOtherLock.setError("Please enter which lock you use");
+        } else {
 
-        userInfoObject.setGender(rbGender.getText().toString());
+            // form is filled completely
 
-        userInfoObject.setName(etName.getText().toString());
-        userInfoObject.setAge(Integer.parseInt(etAge.getText().toString()));
-        userInfoObject.setNumOfYearsUsingSP(Integer.parseInt(etYears.getText().toString()));
-        userInfoObject.setHighestEducationLevel(spnEducationLevel.getSelectedItem().toString());
+            int selectedGenderId = rgGender.getCheckedRadioButtonId();
+            rbGender = (RadioButton) findViewById(selectedGenderId);
 
-        if (rbLock.getText().toString().equalsIgnoreCase("others")) {
-            userInfoObject.setTypeOfLockUsed(etOtherLock.getText().toString());
-        }
-        else {
-            userInfoObject.setTypeOfLockUsed(rbLock.getText().toString());
-        }
+            int selectedLockId = rgTypeOfLock.getCheckedRadioButtonId();
+            rbLock = (RadioButton) findViewById(selectedLockId);
 
-        if(writeToExternalStorage()) {
-            saveToFile();
-        }
-        else {
-            Toast.makeText(DemographicForm.this, "No external storage found", Toast.LENGTH_SHORT).show();
+            userInfoObject.setGender(rbGender.getText().toString());
+
+            userInfoObject.setName(etName.getText().toString());
+            userInfoObject.setAge(Integer.parseInt(etAge.getText().toString()));
+            userInfoObject.setNumOfYearsUsingSP(Integer.parseInt(etYears.getText().toString()));
+            userInfoObject.setHighestEducationLevel(spnEducationLevel.getSelectedItem().toString());
+
+            if (rbLock.getText().toString().equalsIgnoreCase("others")) {
+                userInfoObject.setTypeOfLockUsed(etOtherLock.getText().toString());
+            }
+            else {
+                userInfoObject.setTypeOfLockUsed(rbLock.getText().toString());
+            }
+
+            if(writeToExternalStorage()) {
+                saveToFile();
+            }
+            else {
+                Toast.makeText(DemographicForm.this, "No external storage found", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
