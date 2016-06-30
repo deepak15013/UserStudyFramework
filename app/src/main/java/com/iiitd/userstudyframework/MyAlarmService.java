@@ -20,6 +20,7 @@ import java.io.File;
  */
 public class MyAlarmService extends Service {
 
+    private static final String TAG = MyAlarmService.class.getSimpleName();
     private NotificationManager mManager;
 
     @Nullable
@@ -32,6 +33,7 @@ public class MyAlarmService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.v(TAG,"AlarmService created");
 
         mManager = (NotificationManager) this.getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
 
