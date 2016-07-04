@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UserStudyFramework</string>
+    <string name="app_name">User Study</string>
 
     <string name="education_prompt">Select Education Level</string>
 

@@ -1,7 +1,6 @@
-package com.iiitd.userstudyframework;
+package com.iiitd.userstudyframework.handler;
 
 import android.content.Context;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;

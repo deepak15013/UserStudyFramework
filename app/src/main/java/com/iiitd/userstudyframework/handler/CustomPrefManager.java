@@ -1,9 +1,8 @@
-package com.iiitd.userstudyframework;
+package com.iiitd.userstudyframework.handler;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 /**
  * Created by deepaksood619 on 18/6/16.

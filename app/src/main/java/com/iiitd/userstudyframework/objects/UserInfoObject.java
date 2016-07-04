@@ -1,10 +1,11 @@
-package com.iiitd.userstudyframework;
+package com.iiitd.userstudyframework.objects;
 
 import java.io.Serializable;
 
 /**
  * Created by deepaksood619 on 15/6/16.
  */
+
 public class UserInfoObject implements Serializable {
     private String name;
     private int age;

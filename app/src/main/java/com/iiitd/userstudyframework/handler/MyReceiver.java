@@ -1,45 +1,37 @@
-package com.iiitd.userstudyframework;
+package com.iiitd.userstudyframework.handler;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Environment;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import com.iiitd.userstudyframework.R;
 
 import java.io.File;
 
 /**
  * Created by deepaksood619 on 29/6/16.
  */
-public class MyAlarmService extends Service {
+public class MyReceiver extends BroadcastReceiver {
 
-    private static final String TAG = MyAlarmService.class.getSimpleName();
+    private static final String TAG = MyReceiver.class.getSimpleName();
     private NotificationManager mManager;
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
-    public void onCreate() {
-        super.onCreate();
-        Log.v(TAG,"AlarmService created");
+    public void onReceive(Context context, Intent intent) {
+        Log.v(TAG,"AlarmReceived");
 
-        mManager = (NotificationManager) this.getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
+        mManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Notification notification;
 
-        Notification.Builder builder = new Notification.Builder(this.getApplicationContext());
+        Notification.Builder builder = new Notification.Builder(context);
         builder.setDefaults(Notification.DEFAULT_ALL);
         builder.setContentTitle("User Study Framework");
         builder.setContentText("Sync completed");
@@ -48,7 +40,7 @@ public class MyAlarmService extends Service {
 
         notification = builder.build();
 
-        AwsHandler.shared().init(this.getApplicationContext());
+        AwsHandler.shared().init(context);
 
         File fileDir = Environment.getExternalStorageDirectory();
         String dirLocation = fileDir.getAbsolutePath() + "/UserStudyFramework";
@@ -70,4 +62,5 @@ public class MyAlarmService extends Service {
         mManager.notify(0, notification);
 
     }
+
 }

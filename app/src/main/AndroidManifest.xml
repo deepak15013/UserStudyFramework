@@ -15,10 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".activities.MainActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".DemographicForm"
+        <activity android:name=".activities.DemographicForm"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,11 +30,8 @@
         <service
             android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
             android:enabled="true" />
-
-        <service android:name="com.iiitd.userstudyframework.MyAlarmService"
-            android:enabled="true"/>
         
-        <receiver android:name=".MyReceiver" />
+        <receiver android:name=".handler.MyReceiver" />
 
     </application>
 
