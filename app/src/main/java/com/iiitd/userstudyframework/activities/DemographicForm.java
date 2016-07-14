@@ -67,12 +67,9 @@ public class DemographicForm extends AppCompatActivity {
         }
 
         initObjects();
-
     }
 
     private void initObjects() {
-        Log.v("dks","initObjects");
-
         userInfoObject = new UserInfoObject();
 
         etName = (EditText) findViewById(R.id.et_name);
@@ -159,7 +156,6 @@ public class DemographicForm extends AppCompatActivity {
     }
 
     private void saveToFile() {
-
         File file = Environment.getExternalStorageDirectory();
         File dir = new File(file.getAbsolutePath() + "/UserStudyFramework/");
         dir.mkdir();
@@ -168,7 +164,6 @@ public class DemographicForm extends AppCompatActivity {
 
         String fileName = "UserDemographicInformation.txt";
         File newFile = new File(dir, fileName);
-
 
         try {
             FileWriter fileWriter = new FileWriter(newFile.getAbsoluteFile());

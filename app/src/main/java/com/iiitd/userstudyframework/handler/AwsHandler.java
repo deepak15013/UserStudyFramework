@@ -20,6 +20,8 @@ import java.io.File;
  */
 public class AwsHandler {
 
+    private static final String TAG = AwsHandler.class.getSimpleName();
+
     private static AwsHandler sharedInstance;
     public static AwsHandler shared() {
         if(sharedInstance == null)
@@ -55,8 +57,6 @@ public class AwsHandler {
     public void storeAwsFile(File fileToUpload, String fileKey) {
 
         String fullFileKey = CustomPrefManager.shared().getS3FolderName(this.context) + "/" + fileKey;
-        Log.v("dks","fullFileKey: "+fullFileKey);
-
         TransferObserver observer = transferUtility.upload(
                 MY_BUCKET,      //The bucket to upload to
                 fullFileKey,     //The key for the uploaded object
@@ -72,14 +72,14 @@ public class AwsHandler {
 
             @Override
             public void onStateChanged(int id, TransferState state) {
-                Log.e("statechange", state+"");
+                Log.e(TAG, state + "");
             }
 
             @Override
             public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
                 try{
                     int percentage = (int) (bytesCurrent/bytesTotal * 100);
-                    Log.e("percentage",percentage +"");
+                    Log.e(TAG ,percentage + "");
                 } catch (ArithmeticException e) {
                     e.printStackTrace();
                 }
@@ -88,7 +88,7 @@ public class AwsHandler {
 
             @Override
             public void onError(int id, Exception ex) {
-                Log.e("error","error");
+                Log.e(TAG,"error");
             }
 
         });

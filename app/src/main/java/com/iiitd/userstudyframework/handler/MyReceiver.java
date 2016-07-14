@@ -25,8 +25,6 @@ public class MyReceiver extends BroadcastReceiver {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.v(TAG,"AlarmReceived");
-
         mManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Notification notification;
@@ -51,12 +49,12 @@ public class MyReceiver extends BroadcastReceiver {
             for(int i=0; i<files.length; i++) {
                 if(files[i].isFile()) {
                     AwsHandler.shared().storeAwsFile(files[i], files[i].getName());
-                    Log.v("dks","file uploaded "+ files[i].getName());
+                    Log.v(TAG,"file uploaded "+ files[i].getName());
                 }
             }
         }
         else {
-            Log.v("dks","folder not found");
+            Log.v(TAG,"folder not found");
         }
 
         mManager.notify(0, notification);

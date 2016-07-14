@@ -21,6 +21,8 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
 
@@ -56,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
             for (File file : files) {
                 if (file.isFile()) {
                     AwsHandler.shared().storeAwsFile(file, file.getName());
-                    Log.v("dks", "file uploaded " + file.getName());
+                    Log.v(TAG, "file uploaded " + file.getName());
                 }
             }
         }
         else {
-            Log.v("dks","folder not found");
+            Log.v(TAG,"folder not found");
         }
     }
 
